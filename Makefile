@@ -33,4 +33,4 @@ run:
 	npm run dev
 
 shell:
-	docker-compose exec ${PROJECT_NAME} sh
+	docker-compose exec app sh
