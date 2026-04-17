@@ -1,7 +1,7 @@
 # ===========================================
 # mathIA Frontend (Vue.js) — Makefile
 # ===========================================
-.PHONY: install run build up down logs network
+.PHONY: install run build up down logs network shell
 
 network:
 	@docker network create fintools 2>/dev/null || true
@@ -31,3 +31,6 @@ install:
 
 run:
 	npm run dev
+
+shell:
+	docker-compose exec ${PROJECT_NAME} sh
