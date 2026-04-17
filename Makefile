@@ -4,10 +4,18 @@
 .PHONY: install run build up down logs network
 
 network:
-	docker network create mathia_network 2>/dev/null || true
+	@docker network create fintools 2>/dev/null || true
 
 up: network
-	docker-compose up -d
+	@docker-compose up -d --build
+	@echo ""
+	@echo "=========================================="
+	@echo "  Frontend rodando!"
+	@echo "=========================================="
+	@echo "  Acesso:          http://mathia-web.localhost"
+	@echo "  API Laravel:     http://mathia-api.localhost"
+	@echo "=========================================="
+	@echo ""
 
 down:
 	docker-compose down
