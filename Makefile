@@ -1,7 +1,7 @@
 # ===========================================
 # mathIA Frontend (Vue.js) — Makefile
 # ===========================================
-.PHONY: install run build up dev down down-all logs network traefik
+.PHONY: install run build up dev down down-all logs network traefik shell
 
 network:
 	@docker network create mathia_network 2>/dev/null || true
@@ -57,3 +57,6 @@ install:
 
 run:
 	cd src && npm run dev
+
+shell:
+	docker compose exec mathia-frontend sh
