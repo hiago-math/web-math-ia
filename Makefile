@@ -10,7 +10,7 @@ network:
 traefik: network
 	@if [ "$$(docker ps -q -f name=^traefik$$)" = "" ]; then \
 		echo "==> Traefik não está rodando, subindo..."; \
-		docker compose -f ../api-math/docker-compose.traefik.yml up -d; \
+		docker compose -f ../api-math/docker/local/docker-compose.traefik.yml up -d; \
 	else \
 		echo "==> Traefik já está rodando, pulando."; \
 	fi
@@ -27,7 +27,7 @@ up: traefik
 	@echo ""
 
 dev: traefik
-	@docker compose -f docker-compose.dev.yml up --build
+	@docker compose up --build
 	@echo ""
 	@echo "=========================================="
 	@echo "  Frontend DEV com hot-reload!"
@@ -42,7 +42,7 @@ down:
 
 down-all:
 	docker compose down
-	docker compose -f docker-compose.traefik.yml down
+	docker compose -f docker/local/docker-compose.traefik.yml down
 
 build:
 	docker compose build

@@ -1,20 +1,29 @@
+version: "3.8"
+
 services:
   mathia-frontend:
     build:
       context: .
       dockerfile: docker/Dockerfile
+      target: dev
     container_name: mathia-frontend
+    volumes:
+      - ./src:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
     networks:
       - mathia_network
       - fintools
     restart: unless-stopped
-    volumes:
-      - .:/var/www/html
+    env_file:
+      - .env
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.mathia-frontend.rule=Host(`mathia.localhost`)"
       - "traefik.http.routers.mathia-frontend.entrypoints=web"
-      - "traefik.http.services.mathia-frontend.loadbalancer.server.port=80"
+      - "traefik.http.services.mathia-frontend.loadbalancer.server.port=5173"
+      - "traefik.docker.network=fintools"
 
 networks:
   mathia_network:
