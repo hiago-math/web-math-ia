@@ -51,7 +51,7 @@ logs:
 	docker compose logs -f
 
 install:
-	npm install
+	cd src && npm install
 
 run:
-	npm run dev
+	cd src && npm run dev
