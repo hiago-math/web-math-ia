@@ -1,36 +1,57 @@
 # ===========================================
 # mathIA Frontend (Vue.js) — Makefile
 # ===========================================
-.PHONY: install run build up down logs network shell
+.PHONY: install run build up dev down down-all logs network traefik
 
 network:
+	@docker network create mathia_network 2>/dev/null || true
 	@docker network create fintools 2>/dev/null || true
 
-up: network
-	@docker-compose up -d --build
+traefik: network
+	@if [ "$$(docker ps -q -f name=^traefik$$)" = "" ]; then \
+		echo "==> Traefik não está rodando, subindo..."; \
+		docker compose -f ../api-math/docker-compose.traefik.yml up -d; \
+	else \
+		echo "==> Traefik já está rodando, pulando."; \
+	fi
+
+up: traefik
+	@docker compose up -d --build
 	@echo ""
 	@echo "=========================================="
 	@echo "  Frontend rodando!"
 	@echo "=========================================="
-	@echo "  Acesso:          http://mathia-web.localhost"
-	@echo "  API Laravel:     http://mathia-api.localhost"
+	@echo "  Acesso:   http://mathia.localhost"
+	@echo "  Traefik:  http://localhost:8080"
+	@echo "=========================================="
+	@echo ""
+
+dev: traefik
+	@docker compose -f docker-compose.dev.yml up --build
+	@echo ""
+	@echo "=========================================="
+	@echo "  Frontend DEV com hot-reload!"
+	@echo "=========================================="
+	@echo "  Acesso:   http://mathia.localhost"
+	@echo "  Traefik:  http://localhost:8080"
 	@echo "=========================================="
 	@echo ""
 
 down:
-	docker-compose down
+	docker compose down
+
+down-all:
+	docker compose down
+	docker compose -f docker-compose.traefik.yml down
 
 build:
-	npm run build
+	docker compose build
 
 logs:
-	docker-compose logs -f
+	docker compose logs -f
 
 install:
 	npm install
 
 run:
 	npm run dev
-
-shell:
-	docker-compose exec app sh

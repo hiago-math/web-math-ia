@@ -6,6 +6,7 @@
         <li><router-link to="/" aria-label="Tarefas de aprendizado">Tarefas</router-link></li>
         <li><router-link to="/progresso" aria-label="Progresso do modelo">Progresso</router-link></li>
         <li><router-link to="/testar" aria-label="Testar a IA">Testar</router-link></li>
+        <li><router-link to="/chat" aria-label="Chat com a IA">Chat</router-link></li>
       </ul>
     </nav>
     <main role="main" class="main-content">
