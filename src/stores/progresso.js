@@ -4,15 +4,15 @@ import api from '../services/api'
 
 export const useProgressoStore = defineStore('progresso', () => {
     const historico = ref([])
-    const loading = ref(false)
-    const error = ref(null)
+    const loading   = ref(false)
+    const error     = ref(null)
 
     async function buscar(tarefaId) {
         loading.value = true
-        error.value = null
+        error.value   = null
         try {
             const res = await api.get('/progresso', { params: { tarefa_id: tarefaId } })
-            historico.value = res.data || []
+            historico.value = res.data ?? res ?? []
         } catch (e) {
             error.value = e.error?.message || 'Erro ao carregar progresso'
         } finally {

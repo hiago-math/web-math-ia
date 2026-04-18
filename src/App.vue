@@ -68,7 +68,13 @@
 
           <!-- Rodapé da sidebar -->
           <div class="sidebar-footer">
-            <span class="footer-hint">✦ Selecione ✦ Confirmar</span>
+            <div class="user-info" v-if="auth.user">
+              <span class="user-name">{{ auth.user.name }}</span>
+              <span class="user-handle">@{{ auth.user.username }}</span>
+            </div>
+            <button class="rpg-btn rpg-btn--danger logout-btn" @click="onLogout">
+              ✦ Sair
+            </button>
           </div>
 
         </div>
@@ -92,6 +98,16 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+import { useAuthStore } from './stores/auth'
+
+const auth   = useAuthStore()
+const router = useRouter()
+
+async function onLogout() {
+    await auth.logout()
+    router.push('/login')
+}
 </script>
 
 <style>
@@ -354,11 +370,37 @@ html, body {
 /* Rodapé sidebar */
 .sidebar-footer {
   padding-top: 0.75rem;
-  text-align: center;
-  font-size: 0.65rem;
-  color: var(--text-dim);
-  letter-spacing: 0.1em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   border-top: 1px solid var(--border);
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0 0.25rem;
+}
+
+.user-name {
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  color: var(--text-bright);
+  letter-spacing: 0.05em;
+}
+
+.user-handle {
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.logout-btn {
+  width: 100%;
+  font-size: 0.72rem;
+  padding: 0.4rem;
+  text-align: center;
 }
 
 /* ============================================================
