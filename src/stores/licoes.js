@@ -12,7 +12,7 @@ export const useLicoesStore = defineStore('licoes', () => {
         error.value = null
         sucesso.value = false
         try {
-            await api.post('/api/licoes', { tarefa_id: tarefaId, entrada, saida_esperada: saidaEsperada })
+            await api.post('/licoes', { tarefa_id: tarefaId, entrada, saida_esperada: saidaEsperada })
             sucesso.value = true
         } catch (e) {
             error.value = e.error?.message || 'Erro ao enviar lição'

@@ -12,7 +12,7 @@ export const useInferenciaStore = defineStore('inferencia', () => {
         error.value = null
         resultado.value = null
         try {
-            const res = await api.post('/api/inferencia', { tarefa_id: tarefaId, entrada })
+            const res = await api.post('/inferencia', { tarefa_id: tarefaId, entrada })
             resultado.value = res.data
         } catch (e) {
             error.value = e.error?.message || 'Erro ao executar inferência'

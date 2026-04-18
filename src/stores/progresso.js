@@ -11,7 +11,7 @@ export const useProgressoStore = defineStore('progresso', () => {
         loading.value = true
         error.value = null
         try {
-            const res = await api.get('/api/progresso', { params: { tarefa_id: tarefaId } })
+            const res = await api.get('/progresso', { params: { tarefa_id: tarefaId } })
             historico.value = res.data || []
         } catch (e) {
             error.value = e.error?.message || 'Erro ao carregar progresso'

@@ -13,7 +13,7 @@ export const useChatStore = defineStore('chat', () => {
 
     async function buscarModos() {
         try {
-            const res = await api.get('/api/chat/modos')
+            const res = await api.get('/chat/modos')
             modos.value = res.data
         } catch {}
     }
@@ -42,7 +42,7 @@ export const useChatStore = defineStore('chat', () => {
             .map(m => ({ role: m.role, texto: m.texto }))
 
         try {
-            const res = await api.post('/api/chat', {
+            const res = await api.post('/chat', {
                 mensagem:  texto,
                 historico,
                 sessao_id: sessaoId.value,
@@ -64,7 +64,7 @@ export const useChatStore = defineStore('chat', () => {
         const msg = mensagens.value.find(m => m.id === mensagemId)
         if (!msg?.interacao_id) return
         try {
-            await api.post('/api/chat/feedback', {
+            await api.post('/chat/feedback', {
                 interacao_id: msg.interacao_id,
                 aprovado,
             })
@@ -76,13 +76,13 @@ export const useChatStore = defineStore('chat', () => {
     }
 
     async function treinar() {
-        const res = await api.post('/api/chat/treinar')
+        const res = await api.post('/chat/treinar')
         return res
     }
 
     async function buscarStats() {
         try {
-            const res = await api.get('/api/chat/stats')
+            const res = await api.get('/chat/stats')
             stats.value = res.data
         } catch {}
     }

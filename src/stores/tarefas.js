@@ -11,7 +11,7 @@ export const useTarefasStore = defineStore('tarefas', () => {
         loading.value = true
         error.value = null
         try {
-            const res = await api.get('/api/tarefas')
+            const res = await api.get('/tarefas')
             tarefas.value = res.data || []
         } catch (e) {
             error.value = e.error?.message || 'Erro ao carregar tarefas'
