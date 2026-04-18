@@ -42,12 +42,14 @@ export const useChatStore = defineStore('chat', () => {
             .map(m => ({ role: m.role, texto: m.texto }))
 
         try {
-            const res = await api.post('/chat', {
+            const payload = {
                 mensagem:  texto,
                 historico,
-                sessao_id: sessaoId.value,
                 modo:      modoAtual.value,
-            })
+            }
+            if (sessaoId.value) payload.sessao_id = sessaoId.value
+
+            const res = await api.post('/chat', payload)
 
             sessaoId.value = res.data.sessao_id
             adicionarMensagem('assistant', res.data.resposta, res.data.interacao_id, res.data.modo)
