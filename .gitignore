@@ -1,1 +1,14 @@
-src/node_modules
+# Node / Vite
+src/node_modules/
+src/.env
+src/.env.local
+src/.env.production
+src/dist/
+
+# Docker
+docker/logs/*
+!docker/logs/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db

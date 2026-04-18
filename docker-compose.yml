@@ -17,7 +17,7 @@ services:
       - fintools
     restart: unless-stopped
     env_file:
-      - .env
+      - src/.env
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.mathia-frontend.rule=Host(`mathia.localhost`)"

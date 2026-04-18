@@ -16,6 +16,7 @@ traefik: network
 	fi
 
 up: traefik
+	@cp -f k8s/envs/env.local src/.env
 	@docker compose up -d --build
 	@echo ""
 	@echo "=========================================="
@@ -27,6 +28,7 @@ up: traefik
 	@echo ""
 
 dev: traefik
+	@cp -f k8s/envs/env.local src/.env
 	@docker compose up --build
 	@echo ""
 	@echo "=========================================="

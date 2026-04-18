@@ -71,6 +71,22 @@ src/
 ## Variáveis de Ambiente
 - `VITE_API_URL` — URL base da API Laravel (ex: `http://mathia-api.localhost/api`)
 
+## Padrão de Gerenciamento de .env
+
+**Fonte da verdade:** `k8s/envs/env.local` (versionado no git)
+
+**Fluxo:**
+1. `make up` / `make dev` copia `k8s/envs/env.local` → `src/.env` antes de subir o Docker
+2. O `docker-compose.yml` usa `env_file: src/.env`
+3. O Vite lê `src/.env` (prefixo `VITE_` exposto ao browser)
+4. **Nunca editar `src/.env` diretamente** — ele é sempre regenerado pelo make
+
+**Regras:**
+- `src/.env` está no `.gitignore` — nunca commitar
+- `k8s/envs/env.local` é o único arquivo de env a editar
+- Para novos ambientes, criar `k8s/envs/env.staging`, `k8s/envs/env.production` etc.
+- O `make up` sempre regenera `src/.env` a partir do env correto
+
 ## Modos de Execução
 - `make dev` — Vite com hot-reload (porta 5173, via Traefik)
 - `make up` — Build estático servido pelo Nginx (porta 80, via Traefik)
