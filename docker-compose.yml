@@ -11,7 +11,6 @@ services:
     ports:
       - "5173:5173"
     networks:
-      - mathia_network
       - fintools
     restart: unless-stopped
     env_file:
@@ -24,9 +23,6 @@ services:
       - "traefik.docker.network=fintools"
 
 networks:
-  mathia_network:
-    external: true
-    name: mathia_network
   fintools:
     external: true
     name: fintools

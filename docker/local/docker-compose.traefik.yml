@@ -10,7 +10,7 @@ services:
       - "--providers.docker.network=mathia_network"
       - "--entrypoints.web.address=:80"
     environment:
-      - DOCKER_API_VERSION=1.41
+      - DOCKER_API_VERSION=1.52
     ports:
       - "80:80"
       - "8080:8080"
