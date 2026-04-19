@@ -1,5 +1,5 @@
 # ===========================================
-# mathIA Frontend (Vue.js) — Makefile
+# math.ia Frontend (Vue.js) — Makefile
 # ===========================================
 .PHONY: install run build up dev down down-all logs network traefik shell
 
@@ -22,7 +22,7 @@ up: traefik
 	@echo "=========================================="
 	@echo "  Frontend rodando!"
 	@echo "=========================================="
-	@echo "  Acesso:   http://mathia.localhost"
+	@echo "  Acesso:   http://math-ia.localhost"
 	@echo "  Traefik:  http://localhost:8080"
 	@echo "=========================================="
 	@echo ""
@@ -34,7 +34,7 @@ dev: traefik
 	@echo "=========================================="
 	@echo "  Frontend DEV com hot-reload!"
 	@echo "=========================================="
-	@echo "  Acesso:   http://mathia.localhost"
+	@echo "  Acesso:   http://math-ia.localhost"
 	@echo "  Traefik:  http://localhost:8080"
 	@echo "=========================================="
 	@echo ""
@@ -59,4 +59,4 @@ run:
 	cd src && npm run dev
 
 shell:
-	docker compose exec mathia-frontend sh
+	docker compose exec math-ia-frontend sh

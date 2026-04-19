@@ -11,7 +11,7 @@ export default defineConfig({
     },
     proxy: {
       '/api': {
-        target: 'http://mathia-api:80',
+        target: 'http://math-ia-api:80',
         changeOrigin: true,
       },
     },

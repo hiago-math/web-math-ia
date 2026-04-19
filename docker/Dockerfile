@@ -1,5 +1,5 @@
 # ===========================================
-# mathIA Frontend — Multi-stage Build
+# math.ia Frontend — Multi-stage Build
 # ===========================================
 
 # Stage 1: Desenvolvimento com hot-reload

@@ -1,0 +1,28 @@
+{
+  "hooks": [
+    {
+      "name": "Consultar Documentação math.IA antes de executar",
+      "version": "1.0.0",
+      "when": {
+        "type": "preToolUse",
+        "toolTypes": "*"
+      },
+      "then": {
+        "type": "askAgent",
+        "prompt": "Antes de executar esta ação, consulte a documentação centralizada do projeto math.IA no BookStack (livro 'math.IA', página 'web-math-ia'). Verifique se há diretrizes, padrões ou contexto relevante que devem ser considerados para esta operação. Confirme que você consultou a documentação antes de prosseguir."
+      }
+    },
+    {
+      "name": "Sincronizar .kiro para BookStack via MCP",
+      "version": "2.0.0",
+      "when": {
+        "type": "fileEdited",
+        "patterns": [".kiro/specs/**/*.md", ".kiro/steering/**/*.md"]
+      },
+      "then": {
+        "type": "askAgent",
+        "prompt": "Um arquivo .kiro foi modificado em web-math-ia. Use a ferramenta MCP 'sync_kiro_to_bookstack' para sincronizar com BookStack. Parâmetros: frente_path='web-math-ia', frente_name='Web Math IA', book_name='math.IA'"
+      }
+    },
+  ]
+}
