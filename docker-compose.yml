@@ -8,8 +8,6 @@ services:
     volumes:
       - ./src:/app
       - /app/node_modules
-    ports:
-      - "5173:5173"
     networks:
       - fintools
     restart: unless-stopped
@@ -20,7 +18,7 @@ services:
       - "traefik.http.routers.math-ia-frontend.rule=Host(`math-ia.localhost`)"
       - "traefik.http.routers.math-ia-frontend.entrypoints=web"
       - "traefik.http.services.math-ia-frontend.loadbalancer.server.port=5173"
-      - "traefik.docker.network=fintools"
+      - "traefik.http.routers.math-ia-frontend.service=math-ia-frontend"
 
 networks:
   fintools:
